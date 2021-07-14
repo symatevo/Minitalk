@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: symatevo <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/14 11:56:45 by symatevo          #+#    #+#              #
-#    Updated: 2021/07/14 11:56:46 by symatevo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		= libft.a
 
 FILES		= ft_lstnew_prt.c ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \

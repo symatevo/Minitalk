@@ -1,40 +1,45 @@
-#include "minitalk.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <signal.h>
+#include <stdlib.h>
+#include "libft/libft.h"
 
-int i;
-
-void	ft_handler_bit(int num)
+typedef struct s_data
 {
-	unsigned char ch;
-	if (num == SIGUSR1)
+	char	ch;
+	int	pid;
+	int		pos;
+}				t_data;
+
+t_data data;
+
+void	ft_handler_bit(int sig)
+{
+	if (sig == SIGUSR2)
+		data.ch |= 1 << data.pos; 
+	data.pos++;
+	if (data.pos == 8)
 	{
-		ch = 1 & 1;
-		ch = ch << 1;
-		i++;
-	}
-	if (num == SIGUSR2)
-	{
-		ch = 0 & 1;
-		ch = ch << 1;
-		i++;
-	}
-	if (i == 7)
-	{
-		ft_putchar(ch);
-		i = 0;
+		data.pos = 0;
+		if (!data.ch)
+			ft_putchar('\n');
+		else
+			ft_putchar(data.ch);
+		data.ch = 0;
 	}
 }
 
 int		main(void)
 {
-	i = 0;
-	int pid;
-	pid = getpid();
-	ft_putnbr(pid);
-		signal(SIGUSR2, ft_handler_bit);
-		signal(SIGUSR1, ft_handler_bit);
+	data.ch = 0;
+	data.pos = 0;
+	ft_putnbr(getpid());
+	ft_putchar('\n');
+	signal(SIGUSR1, ft_handler_bit);
+	signal(SIGUSR2, ft_handler_bit);
 	while (1)
 	{
-	//	signal(SIGUSR1, ft_handler_bit);
-	//	signal(SIGUSR2, ft_handler_bit);
+		pause();
 	}
+	return (0);
 }
